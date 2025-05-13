@@ -5,61 +5,40 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    # Get the first 150 Pokémon from the API
-    response = requests.get("https://pokeapi.co/api/v2/pokemon?limit=150")
+    # Fetch the list of dog breeds
+    response = requests.get('https://dogapi.dog/api-v2/breeds/list')
     data = response.json()
-    pokemon_list = data['results']
+    breed_list = data['result']
     
-    # Create a list to hold Pokémon details
-    pokemons = []
-    
-    for pokemon in pokemon_list:
-        # Each Pokémon URL looks like "https://pokeapi.co/api/v2/pokemon/1/"
-        url = pokemon['url']
-        parts = url.strip("/").split("/")
-        id = parts[-1]  # The last part is the Pokémon's ID
+    breeds = []
+
+    for breed in breed_list:
+        # Construct the breed details URL
+        breed_url = f'https://dogapi.dog/api-v2/breeds/{breed["slug"]}'
+        breed_response = requests.get(breed_url)
+        breed_data = breed_response.json()['result']
         
-        # Create an image URL using the Pokémon's ID
-        image_url = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png"
-        
-        pokemons.append({
-            'name': pokemon['name'].capitalize(),
-            'id': id,
-            'image': image_url
+        breeds.append({
+            'id': breed_data['id'],
+            'name': breed_data['name'],
+            'image': breed_data['image']['url'],
+            'description': breed_data.get('description', 'No description available'),
+            'temperament': breed_data.get('temperament', 'Temperament not specified'),
+            'life_span': breed_data.get('life_span', 'Life span not specified'),
+            'weight': breed_data.get('weight', 'Weight not specified'),
+            'height': breed_data.get('height', 'Height not specified'),
+            'bred_for': breed_data.get('bred_for', 'Purpose not specified'),
+            'breed_group': breed_data.get('breed_group', 'Group not specified')
         })
-    
-    # Send the Pokémon list to the index.html page
-    return render_template("index.html", pokemons=pokemons)
 
-# New route: When a user clicks a Pokémon card, this page shows more details and a stats chart
-@app.route("/pokemon/<int:id>")
-def pokemon_detail(id):
-    # Get detailed info for the Pokémon using its id
-    response = requests.get(f"https://pokeapi.co/api/v2/pokemon/{id}")
-    data = response.json()
-    
-    # Extract extra details like types, height, and weight
-    types = [t['type']['name'] for t in data['types']]
-    height = data.get('height')
-    weight = data.get('weight')
-    name = data.get('name').capitalize()
-    image_url = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png"
-    
-    # Extract base stats for the chart (e.g., hp, attack, defense, etc.)
-    stat_names = [stat['stat']['name'] for stat in data['stats']]
-    stat_values = [stat['base_stat'] for stat in data['stats']]
-    
-    # Send all details to the pokemon.html template
-    return render_template("pokemon.html", pokemon={
-        'name': name,
-        'id': id,
-        'image': image_url,
-        'types': types,
-        'height': height,
-        'weight': weight,
-        'stat_names': stat_names,
-        'stat_values': stat_values
-    })
+    return render_template("index.html", breeds=breeds)
 
-if __name__ == '__main__':
+@app.route("/breed/<int:id>")
+def breed_detail(id):
+    breed = next((b for b in breeds if b['id'] == id), None)
+    if breed:
+        return render_template("breed.html", breed=breed)
+    return "Breed not found", 404
+
+if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ breed['name'] }} Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ breed['name'] }} Details</h1>
+        <div class="breed-detail">
+            <img src="{{ breed['image'] }}" alt="{{ breed['name'] }}">
+            <p><strong>ID:</strong> {{ breed['id'] }}</p>
+            <p><strong>Description:</strong> {{ breed['description'] }}</p>
+            <p><strong>Temperament:</strong> {{ breed['temperament'] }}</p>
+            <p><strong>Life Span:</strong> {{ breed['life_span'] }}</p>
+            <p><strong>Weight:</strong> {{ breed['weight'] }}</p>
+            <p><strong>Height:</strong> {{ breed['height'] }}</p>
+            <p><strong>Bred For:</strong> {{ breed['bred_for'] }}</p>
+            <p><strong>Breed Group:</strong> {{ breed['breed_group'] }}</p>
+        </div>
+        <a href="{{ url_for('index') }}">Back to Breed List</a>
+    </div>
+</body>
+</html>
