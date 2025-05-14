@@ -2,23 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dog Breeds</title>
+    <title>Cat Breeds</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Dog Breeds</h1>
-    <ul>
-        {% for breed in breeds %}
+    <h1>🐱 Cat Breeds</h1>
+    <ul class="cat-list">
+        {% for cat in cats %}
             <li>
-                <strong>{{ breed.name }}</strong>
-                {% if breed.sub_breeds %}
-                    <ul>
-                        {% for sub_breed in breed.sub_breeds %}
-                            <li>{{ sub_breed }}</li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    No sub-breeds
-                {% endif %}
+                <a href="{{ url_for('cat_detail', cat_name=cat.name) }}">{{ cat.name }}</a>
             </li>
         {% endfor %}
     </ul>
