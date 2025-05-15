@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ character.name }} - Details</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>{{ character.name }}</h1>
+    <div class="pokemon-detail">
+      <img src="{{ character.image }}" alt="{{ character.name }}">
+      <p><strong>Status:</strong> {{ character.status }}</p>
+      <p><strong>Species:</strong> {{ character.species }}</p>
+      <p><strong>Gender:</strong> {{ character.gender }}</p>
+      <p><strong>Origin:</strong> {{ character.origin.name }}</p>
+    </div>
+    <p><a href="{{ url_for('index') }}">Back to all Characters</a></p>
+  </div>
+</body>
+</html>

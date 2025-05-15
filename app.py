@@ -1,32 +1,21 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 import requests
 
 app = Flask(__name__)
-API_KEY = "YOUR_API_KEY"  # Replace with your actual API key from api-ninjas.com
 
-# Homepage: shows list of cat names
 @app.route('/')
 def index():
-    url = "https://api.api-ninjas.com/v1/cats"
-    headers = {'X-Api-Key': API_KEY}
-    response = requests.get(url, headers=headers)
+    response = requests.get("https://rickandmortyapi.com/api/character?page=1")
+    data = response.json()
+    characters = data['results']
 
-    if response.status_code == 200:
-        cats = response.json()
-    else:
-        cats = []
-    return render_template('index.html', cats=cats)
+    return render_template('index.html', characters=characters)
 
-# Detailed view: fetch full cat data by name
-@app.route('/cat/<cat_name>')
-def cat_detail(cat_name):
-    url = f"https://api.api-ninjas.com/v1/cats?name={cat_name}"
-    headers = {'X-Api-Key': API_KEY}
-    response = requests.get(url, headers=headers)
+@app.route('/character/<int:id>')
+def character_detail(id):
+    response = requests.get(f"https://rickandmortyapi.com/api/character/{id}")
+    character = response.json()
+    return render_template('character.html', character=character)
 
-    if response.status_code == 200 and response.json():
-        cat = response.json()[0]  # API returns list
-    else:
-        cat = {"error": "Cat not found or unavailable."}
-
-    return render_template('cat.html', cat=cat)
+if __name__ == '__main__':
+    app.run(debug=True)

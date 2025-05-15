@@ -1,54 +1,106 @@
+/* General page styling */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
-  padding: 20px;
-  text-align: center;
-}
-
-.cat-list {
-  list-style: none;
+  background-color: #f0f8ff;
+  margin: 0;
   padding: 0;
-  max-width: 600px;
-  margin: auto;
 }
 
-.cat-list li {
-  margin: 10px 0;
-  font-size: 1.2rem;
+/* Container styling */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
 }
 
-.cat-list a {
+/* Title styling */
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 40px;
+}
+
+/* Card container styling */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Remove link default styles */
+.card-link {
   text-decoration: none;
-  color: #007BFF;
+  color: inherit;
 }
 
-.cat-list a:hover {
-  text-decoration: underline;
-}
-
-.cat-container {
-  max-width: 700px;
-  margin: auto;
+/* Individual card styling */
+.card {
   background-color: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
 }
 
-.cat-img {
+/* Hover effect for cards */
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Card image styling */
+.card img {
   width: 100%;
-  max-width: 400px;
+  height: auto;
+}
+
+/* Card body styling */
+.card-body {
+  padding: 15px;
+}
+
+/* Card title styling */
+.card-body h5 {
+  font-size: 1.2em;
+  margin: 0;
+  color: #34495e;
+}
+
+/* Card text styling */
+.card-body p {
+  color: #777;
+  margin-top: 5px;
+}
+
+/* Detail page styling */
+.pokemon-detail {
+  text-align: center;
+  padding: 20px;
+  background-color: #ffffff;
   border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-detail img {
+  width: 200px;
+  height: auto;
   margin-bottom: 20px;
 }
 
-.cat-facts {
-  list-style: none;
-  padding: 0;
-  text-align: left;
+.pokemon-detail p {
+  font-size: 1.1em;
+  margin: 10px 0;
 }
 
-.cat-facts li {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
+/* Link back */
+a {
+  color: #3498db;
+}
+
+a:hover {
+  text-decoration: underline;
 }
