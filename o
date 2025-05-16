@@ -1,0 +1,11 @@
+import requests
+#print all cards
+response = response.get("link w/ api")
+data = response.json()
+big_cards=[]
+for card in data['cards']:
+    try
+       catch KeyError
+    if card['cmc'] > 5:
+      print(card['name'], card['cmc'])
+render card=big_cards

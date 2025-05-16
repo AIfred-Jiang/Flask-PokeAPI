@@ -19,3 +19,6 @@ def character_detail(id):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+#note: limit the number of characters
