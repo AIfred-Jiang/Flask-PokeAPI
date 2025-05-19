@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Error</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Error</h1>
+    <div class="character-detail">
+      <p>{{ message }}</p>
+    </div>
+    <p><a href="{{ url_for('index') }}">Back to all Characters</a></p>
+  </div>
+</body>
+</html>
