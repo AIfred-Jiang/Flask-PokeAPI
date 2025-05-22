@@ -29,7 +29,7 @@ def search():
 
     filtered = [
         char for char in characters
-        if query in char['name'].lower()
+        if query in char['name'].lower()                                                                                                 
         or query in char['species'].lower()
         or query in char['status'].lower()
     ]
@@ -40,7 +40,7 @@ def search():
     return render_template('search.html', characters=filtered, query=query)
 
 @app.route('/character/<int:id>')
-def character_detail(id):
+def character_detail(id):                                  
     if id < 1 or id > 200:
         return render_template("error.html", message="Character ID must be between 1 and 200."), 404
 
