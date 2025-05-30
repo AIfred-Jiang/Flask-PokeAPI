@@ -1,13 +1,7 @@
 from flask import Flask, render_template, request
 import requests
-from urllib.parse import quote
 
 app = Flask(__name__)
-
-@app.template_filter('urlencode')
-def urlencode_filter(s):
-    return quote(s)
-
 
 def get_all_characters():
     characters = []
